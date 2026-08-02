@@ -9,61 +9,312 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalRouteImport } from './routes/_portal'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PortalIndexRouteImport } from './routes/_portal.index'
+import { Route as PortalCrmRouteImport } from './routes/_portal.crm'
+import { Route as PortalLeaveRouteImport } from './routes/_portal.leave'
+import { Route as PortalReportsRouteImport } from './routes/_portal.reports'
+import { Route as PortalSettingsRouteImport } from './routes/_portal.settings'
+import { Route as PortalTasksRouteImport } from './routes/_portal.tasks'
+import { Route as PortalTimesheetsRouteImport } from './routes/_portal.timesheets'
+import { Route as PortalEmployeesIndexRouteImport } from './routes/_portal.employees.index'
+import { Route as PortalEmployeesEmployeeIdRouteImport } from './routes/_portal.employees.$employeeId'
+import { Route as PortalProjectsIndexRouteImport } from './routes/_portal.projects.index'
+import { Route as PortalProjectsProjectIdRouteImport } from './routes/_portal.projects.$projectId'
 
-const IndexRoute = IndexRouteImport.update({
+const PortalRoute = PortalRouteImport.update({
+  id: '/_portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalCrmRoute = PortalCrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalLeaveRoute = PortalLeaveRouteImport.update({
+  id: '/leave',
+  path: '/leave',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalReportsRoute = PortalReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalSettingsRoute = PortalSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalTasksRoute = PortalTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalTimesheetsRoute = PortalTimesheetsRouteImport.update({
+  id: '/timesheets',
+  path: '/timesheets',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalEmployeesIndexRoute = PortalEmployeesIndexRouteImport.update({
+  id: '/employees/',
+  path: '/employees/',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalEmployeesEmployeeIdRoute =
+  PortalEmployeesEmployeeIdRouteImport.update({
+    id: '/employees/$employeeId',
+    path: '/employees/$employeeId',
+    getParentRoute: () => PortalRoute,
+  } as any)
+const PortalProjectsIndexRoute = PortalProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalProjectsProjectIdRoute = PortalProjectsProjectIdRouteImport.update({
+  id: '/projects/$projectId',
+  path: '/projects/$projectId',
+  getParentRoute: () => PortalRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof PortalIndexRoute
+  '/login': typeof LoginRoute
+  '/crm': typeof PortalCrmRoute
+  '/leave': typeof PortalLeaveRoute
+  '/reports': typeof PortalReportsRoute
+  '/settings': typeof PortalSettingsRoute
+  '/tasks': typeof PortalTasksRoute
+  '/timesheets': typeof PortalTimesheetsRoute
+  '/employees/$employeeId': typeof PortalEmployeesEmployeeIdRoute
+  '/projects/$projectId': typeof PortalProjectsProjectIdRoute
+  '/employees/': typeof PortalEmployeesIndexRoute
+  '/projects/': typeof PortalProjectsIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/crm': typeof PortalCrmRoute
+  '/leave': typeof PortalLeaveRoute
+  '/reports': typeof PortalReportsRoute
+  '/settings': typeof PortalSettingsRoute
+  '/tasks': typeof PortalTasksRoute
+  '/timesheets': typeof PortalTimesheetsRoute
+  '/': typeof PortalIndexRoute
+  '/employees/$employeeId': typeof PortalEmployeesEmployeeIdRoute
+  '/projects/$projectId': typeof PortalProjectsProjectIdRoute
+  '/employees': typeof PortalEmployeesIndexRoute
+  '/projects': typeof PortalProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_portal': typeof PortalRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_portal/crm': typeof PortalCrmRoute
+  '/_portal/leave': typeof PortalLeaveRoute
+  '/_portal/reports': typeof PortalReportsRoute
+  '/_portal/settings': typeof PortalSettingsRoute
+  '/_portal/tasks': typeof PortalTasksRoute
+  '/_portal/timesheets': typeof PortalTimesheetsRoute
+  '/_portal/': typeof PortalIndexRoute
+  '/_portal/employees/$employeeId': typeof PortalEmployeesEmployeeIdRoute
+  '/_portal/projects/$projectId': typeof PortalProjectsProjectIdRoute
+  '/_portal/employees/': typeof PortalEmployeesIndexRoute
+  '/_portal/projects/': typeof PortalProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/crm'
+    | '/leave'
+    | '/reports'
+    | '/settings'
+    | '/tasks'
+    | '/timesheets'
+    | '/employees/$employeeId'
+    | '/projects/$projectId'
+    | '/employees/'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/login'
+    | '/crm'
+    | '/leave'
+    | '/reports'
+    | '/settings'
+    | '/tasks'
+    | '/timesheets'
+    | '/'
+    | '/employees/$employeeId'
+    | '/projects/$projectId'
+    | '/employees'
+    | '/projects'
+  id:
+    | '__root__'
+    | '/_portal'
+    | '/login'
+    | '/_portal/crm'
+    | '/_portal/leave'
+    | '/_portal/reports'
+    | '/_portal/settings'
+    | '/_portal/tasks'
+    | '/_portal/timesheets'
+    | '/_portal/'
+    | '/_portal/employees/$employeeId'
+    | '/_portal/projects/$projectId'
+    | '/_portal/employees/'
+    | '/_portal/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  PortalRoute: typeof PortalRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_portal': {
+      id: '/_portal'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_portal/': {
+      id: '/_portal/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/crm': {
+      id: '/_portal/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof PortalCrmRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/leave': {
+      id: '/_portal/leave'
+      path: '/leave'
+      fullPath: '/leave'
+      preLoaderRoute: typeof PortalLeaveRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/reports': {
+      id: '/_portal/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof PortalReportsRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/settings': {
+      id: '/_portal/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof PortalSettingsRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/tasks': {
+      id: '/_portal/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof PortalTasksRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/timesheets': {
+      id: '/_portal/timesheets'
+      path: '/timesheets'
+      fullPath: '/timesheets'
+      preLoaderRoute: typeof PortalTimesheetsRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/employees/': {
+      id: '/_portal/employees/'
+      path: '/employees'
+      fullPath: '/employees/'
+      preLoaderRoute: typeof PortalEmployeesIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/employees/$employeeId': {
+      id: '/_portal/employees/$employeeId'
+      path: '/employees/$employeeId'
+      fullPath: '/employees/$employeeId'
+      preLoaderRoute: typeof PortalEmployeesEmployeeIdRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/projects/': {
+      id: '/_portal/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof PortalProjectsIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/_portal/projects/$projectId': {
+      id: '/_portal/projects/$projectId'
+      path: '/projects/$projectId'
+      fullPath: '/projects/$projectId'
+      preLoaderRoute: typeof PortalProjectsProjectIdRouteImport
+      parentRoute: typeof PortalRoute
     }
   }
 }
 
+interface PortalRouteChildren {
+  PortalCrmRoute: typeof PortalCrmRoute
+  PortalLeaveRoute: typeof PortalLeaveRoute
+  PortalReportsRoute: typeof PortalReportsRoute
+  PortalSettingsRoute: typeof PortalSettingsRoute
+  PortalTasksRoute: typeof PortalTasksRoute
+  PortalTimesheetsRoute: typeof PortalTimesheetsRoute
+  PortalIndexRoute: typeof PortalIndexRoute
+  PortalEmployeesEmployeeIdRoute: typeof PortalEmployeesEmployeeIdRoute
+  PortalProjectsProjectIdRoute: typeof PortalProjectsProjectIdRoute
+  PortalEmployeesIndexRoute: typeof PortalEmployeesIndexRoute
+  PortalProjectsIndexRoute: typeof PortalProjectsIndexRoute
+}
+
+const PortalRouteChildren: PortalRouteChildren = {
+  PortalCrmRoute: PortalCrmRoute,
+  PortalLeaveRoute: PortalLeaveRoute,
+  PortalReportsRoute: PortalReportsRoute,
+  PortalSettingsRoute: PortalSettingsRoute,
+  PortalTasksRoute: PortalTasksRoute,
+  PortalTimesheetsRoute: PortalTimesheetsRoute,
+  PortalIndexRoute: PortalIndexRoute,
+  PortalEmployeesEmployeeIdRoute: PortalEmployeesEmployeeIdRoute,
+  PortalProjectsProjectIdRoute: PortalProjectsProjectIdRoute,
+  PortalEmployeesIndexRoute: PortalEmployeesIndexRoute,
+  PortalProjectsIndexRoute: PortalProjectsIndexRoute,
+}
+
+const PortalRouteWithChildren =
+  PortalRoute._addFileChildren(PortalRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  PortalRoute: PortalRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
