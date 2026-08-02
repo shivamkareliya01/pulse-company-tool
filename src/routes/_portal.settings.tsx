@@ -190,7 +190,7 @@ function SettingsPage() {
                         <td className="px-6 py-3">{perm}</td>
                         {Object.keys(matrix).map((role) => (
                           <td key={role} className="px-4 py-3 text-center">
-                            <Checkbox defaultChecked={matrix[role]![i]} aria-label={`${role}: ${perm}`} />
+                            <Checkbox defaultChecked={matrix[role]?.[i] ?? false} aria-label={`${role}: ${perm}`} />
                           </td>
                         ))}
                       </tr>
